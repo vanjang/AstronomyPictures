@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		A36CBAFD2B5D027F00CFF737 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBAFC2B5D027F00CFF737 /* AppDelegate.swift */; };
 		A36CBAFF2B5D027F00CFF737 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBAFE2B5D027F00CFF737 /* SceneDelegate.swift */; };
-		A36CBB012B5D027F00CFF737 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB002B5D027F00CFF737 /* ViewController.swift */; };
-		A36CBB042B5D027F00CFF737 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A36CBB022B5D027F00CFF737 /* Main.storyboard */; };
+		A36CBB012B5D027F00CFF737 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB002B5D027F00CFF737 /* MainViewController.swift */; };
 		A36CBB062B5D028100CFF737 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A36CBB052B5D028100CFF737 /* Assets.xcassets */; };
 		A36CBB092B5D028100CFF737 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A36CBB072B5D028100CFF737 /* LaunchScreen.storyboard */; };
 		A36CBB142B5D028200CFF737 /* AstronomyPicturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB132B5D028200CFF737 /* AstronomyPicturesTests.swift */; };
@@ -39,8 +38,7 @@
 		A36CBAF92B5D027F00CFF737 /* AstronomyPictures.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AstronomyPictures.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A36CBAFC2B5D027F00CFF737 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A36CBAFE2B5D027F00CFF737 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A36CBB002B5D027F00CFF737 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A36CBB032B5D027F00CFF737 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A36CBB002B5D027F00CFF737 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A36CBB052B5D028100CFF737 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A36CBB082B5D028100CFF737 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A36CBB0A2B5D028100CFF737 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,10 +97,10 @@
 		A36CBAFB2B5D027F00CFF737 /* AstronomyPictures */ = {
 			isa = PBXGroup;
 			children = (
+				A36CBB302B5D109100CFF737 /* PictureDetail */,
+				A36CBB2F2B5D108000CFF737 /* Main */,
 				A36CBAFC2B5D027F00CFF737 /* AppDelegate.swift */,
 				A36CBAFE2B5D027F00CFF737 /* SceneDelegate.swift */,
-				A36CBB002B5D027F00CFF737 /* ViewController.swift */,
-				A36CBB022B5D027F00CFF737 /* Main.storyboard */,
 				A36CBB052B5D028100CFF737 /* Assets.xcassets */,
 				A36CBB072B5D028100CFF737 /* LaunchScreen.storyboard */,
 				A36CBB0A2B5D028100CFF737 /* Info.plist */,
@@ -125,6 +123,21 @@
 				A36CBB1F2B5D028200CFF737 /* AstronomyPicturesUITestsLaunchTests.swift */,
 			);
 			path = AstronomyPicturesUITests;
+			sourceTree = "<group>";
+		};
+		A36CBB2F2B5D108000CFF737 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				A36CBB002B5D027F00CFF737 /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		A36CBB302B5D109100CFF737 /* PictureDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PictureDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +246,6 @@
 			files = (
 				A36CBB092B5D028100CFF737 /* LaunchScreen.storyboard in Resources */,
 				A36CBB062B5D028100CFF737 /* Assets.xcassets in Resources */,
-				A36CBB042B5D027F00CFF737 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A36CBB012B5D027F00CFF737 /* ViewController.swift in Sources */,
+				A36CBB012B5D027F00CFF737 /* MainViewController.swift in Sources */,
 				A36CBAFD2B5D027F00CFF737 /* AppDelegate.swift in Sources */,
 				A36CBAFF2B5D027F00CFF737 /* SceneDelegate.swift in Sources */,
 			);
@@ -297,14 +309,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A36CBB022B5D027F00CFF737 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A36CBB032B5D027F00CFF737 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A36CBB072B5D028100CFF737 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -442,7 +446,7 @@
 				INFOPLIST_FILE = AstronomyPictures/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -470,7 +474,7 @@
 				INFOPLIST_FILE = AstronomyPictures/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
