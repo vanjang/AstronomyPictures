@@ -15,6 +15,7 @@
 		A36CBB142B5D028200CFF737 /* AstronomyPicturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB132B5D028200CFF737 /* AstronomyPicturesTests.swift */; };
 		A36CBB1E2B5D028200CFF737 /* AstronomyPicturesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB1D2B5D028200CFF737 /* AstronomyPicturesUITests.swift */; };
 		A36CBB202B5D028200CFF737 /* AstronomyPicturesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB1F2B5D028200CFF737 /* AstronomyPicturesUITestsLaunchTests.swift */; };
+		A36CBB322B5D12F300CFF737 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A36CBB312B5D12F300CFF737 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		A36CBB192B5D028200CFF737 /* AstronomyPicturesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AstronomyPicturesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A36CBB1D2B5D028200CFF737 /* AstronomyPicturesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronomyPicturesUITests.swift; sourceTree = "<group>"; };
 		A36CBB1F2B5D028200CFF737 /* AstronomyPicturesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronomyPicturesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A36CBB312B5D12F300CFF737 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		A36CBAF02B5D027F00CFF737 = {
 			isa = PBXGroup;
 			children = (
+				A36CBB312B5D12F300CFF737 /* .gitignore */,
 				A36CBAFB2B5D027F00CFF737 /* AstronomyPictures */,
 				A36CBB122B5D028200CFF737 /* AstronomyPicturesTests */,
 				A36CBB1C2B5D028200CFF737 /* AstronomyPicturesUITests */,
@@ -245,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A36CBB092B5D028100CFF737 /* LaunchScreen.storyboard in Resources */,
+				A36CBB322B5D12F300CFF737 /* .gitignore in Resources */,
 				A36CBB062B5D028100CFF737 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
