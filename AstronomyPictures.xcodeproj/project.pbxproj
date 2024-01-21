@@ -13,9 +13,14 @@
 		A36CBB062B5D028100CFF737 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A36CBB052B5D028100CFF737 /* Assets.xcassets */; };
 		A36CBB092B5D028100CFF737 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A36CBB072B5D028100CFF737 /* LaunchScreen.storyboard */; };
 		A36CBB142B5D028200CFF737 /* AstronomyPicturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB132B5D028200CFF737 /* AstronomyPicturesTests.swift */; };
-		A36CBB1E2B5D028200CFF737 /* AstronomyPicturesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB1D2B5D028200CFF737 /* AstronomyPicturesUITests.swift */; };
+		A36CBB1E2B5D028200CFF737 /* AstronomyPicturesMainUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB1D2B5D028200CFF737 /* AstronomyPicturesMainUITests.swift */; };
 		A36CBB202B5D028200CFF737 /* AstronomyPicturesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB1F2B5D028200CFF737 /* AstronomyPicturesUITestsLaunchTests.swift */; };
 		A36CBB322B5D12F300CFF737 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A36CBB312B5D12F300CFF737 /* .gitignore */; };
+		A36CBB342B5D6B7900CFF737 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB332B5D6B7900CFF737 /* MainView.swift */; };
+		A36CBB362B5D6C6000CFF737 /* UsesAutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB352B5D6C6000CFF737 /* UsesAutoLayout.swift */; };
+		A36CBB392B5D6D2A00CFF737 /* MainAstronomyPictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB382B5D6D2A00CFF737 /* MainAstronomyPictureCell.swift */; };
+		A36CBB3B2B5D76F000CFF737 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB3A2B5D76F000CFF737 /* MainViewModel.swift */; };
+		A36CBB3D2B5D772D00CFF737 /* MainAtronomyPictureCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36CBB3C2B5D772D00CFF737 /* MainAtronomyPictureCellItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,9 +51,14 @@
 		A36CBB0F2B5D028200CFF737 /* AstronomyPicturesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AstronomyPicturesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A36CBB132B5D028200CFF737 /* AstronomyPicturesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronomyPicturesTests.swift; sourceTree = "<group>"; };
 		A36CBB192B5D028200CFF737 /* AstronomyPicturesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AstronomyPicturesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A36CBB1D2B5D028200CFF737 /* AstronomyPicturesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronomyPicturesUITests.swift; sourceTree = "<group>"; };
+		A36CBB1D2B5D028200CFF737 /* AstronomyPicturesMainUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronomyPicturesMainUITests.swift; sourceTree = "<group>"; };
 		A36CBB1F2B5D028200CFF737 /* AstronomyPicturesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronomyPicturesUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A36CBB312B5D12F300CFF737 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A36CBB332B5D6B7900CFF737 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		A36CBB352B5D6C6000CFF737 /* UsesAutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsesAutoLayout.swift; sourceTree = "<group>"; };
+		A36CBB382B5D6D2A00CFF737 /* MainAstronomyPictureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAstronomyPictureCell.swift; sourceTree = "<group>"; };
+		A36CBB3A2B5D76F000CFF737 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		A36CBB3C2B5D772D00CFF737 /* MainAtronomyPictureCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAtronomyPictureCellItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +110,7 @@
 		A36CBAFB2B5D027F00CFF737 /* AstronomyPictures */ = {
 			isa = PBXGroup;
 			children = (
+				A36CBB372B5D6CE800CFF737 /* PropertyWrappers */,
 				A36CBB302B5D109100CFF737 /* PictureDetail */,
 				A36CBB2F2B5D108000CFF737 /* Main */,
 				A36CBAFC2B5D027F00CFF737 /* AppDelegate.swift */,
@@ -122,7 +133,7 @@
 		A36CBB1C2B5D028200CFF737 /* AstronomyPicturesUITests */ = {
 			isa = PBXGroup;
 			children = (
-				A36CBB1D2B5D028200CFF737 /* AstronomyPicturesUITests.swift */,
+				A36CBB1D2B5D028200CFF737 /* AstronomyPicturesMainUITests.swift */,
 				A36CBB1F2B5D028200CFF737 /* AstronomyPicturesUITestsLaunchTests.swift */,
 			);
 			path = AstronomyPicturesUITests;
@@ -132,6 +143,10 @@
 			isa = PBXGroup;
 			children = (
 				A36CBB002B5D027F00CFF737 /* MainViewController.swift */,
+				A36CBB332B5D6B7900CFF737 /* MainView.swift */,
+				A36CBB382B5D6D2A00CFF737 /* MainAstronomyPictureCell.swift */,
+				A36CBB3A2B5D76F000CFF737 /* MainViewModel.swift */,
+				A36CBB3C2B5D772D00CFF737 /* MainAtronomyPictureCellItem.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -141,6 +156,14 @@
 			children = (
 			);
 			path = PictureDetail;
+			sourceTree = "<group>";
+		};
+		A36CBB372B5D6CE800CFF737 /* PropertyWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				A36CBB352B5D6C6000CFF737 /* UsesAutoLayout.swift */,
+			);
+			path = PropertyWrappers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,9 +297,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A36CBB3B2B5D76F000CFF737 /* MainViewModel.swift in Sources */,
 				A36CBB012B5D027F00CFF737 /* MainViewController.swift in Sources */,
+				A36CBB362B5D6C6000CFF737 /* UsesAutoLayout.swift in Sources */,
+				A36CBB392B5D6D2A00CFF737 /* MainAstronomyPictureCell.swift in Sources */,
+				A36CBB342B5D6B7900CFF737 /* MainView.swift in Sources */,
 				A36CBAFD2B5D027F00CFF737 /* AppDelegate.swift in Sources */,
 				A36CBAFF2B5D027F00CFF737 /* SceneDelegate.swift in Sources */,
+				A36CBB3D2B5D772D00CFF737 /* MainAtronomyPictureCellItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,7 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A36CBB202B5D028200CFF737 /* AstronomyPicturesUITestsLaunchTests.swift in Sources */,
-				A36CBB1E2B5D028200CFF737 /* AstronomyPicturesUITests.swift in Sources */,
+				A36CBB1E2B5D028200CFF737 /* AstronomyPicturesMainUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
