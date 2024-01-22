@@ -1,5 +1,5 @@
 //
-//  PictureDetailDescriptionView.swift
+//  TitleDescriptionView.swift
 //  AstronomyPictures
 //
 //  Created by myung hoon on 22/01/2024.

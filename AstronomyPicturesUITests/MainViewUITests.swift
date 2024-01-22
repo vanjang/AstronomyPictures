@@ -1,13 +1,13 @@
 //
-//  AstronomyPicturesMainUITests.swift
-//  AstronomyPicturesMainUITests
+//  MainViewUITests.swift
+//  AstronomyPicturesUITests
 //
 //  Created by myung hoon on 21/01/2024.
 //
 
 import XCTest
 
-final class AstronomyPicturesMainUITests: XCTestCase {
+final class MainViewUITests: XCTestCase {
     let app = XCUIApplication()
     
     override func setUpWithError() throws {

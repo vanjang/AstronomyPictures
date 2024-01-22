@@ -22,18 +22,22 @@ struct PictureDetailView: View {
                             .clipped()
                             .padding(.bottom, 10)
 
-                        TitleDescriptionView(title: .constant("Very long title for test, very very long title"), description: .constant("Very long Description for test, very very long Description"))
+                        TitleDescriptionView(title: .constant("Title"), description: .constant("Very long Description for test, very very long Description"))
                             .padding(.horizontal, 16)
+                            .accessibilityIdentifier("TitleDescriptionViewTitle")
                         
                         Spacer(minLength: 14)
                         
                         TitleDescriptionView(title: .constant("Date"), description: .constant("Description"))
                             .padding(.horizontal, 16)
+                            .accessibilityIdentifier("TitleDescriptionViewDate")
                         
                         Spacer(minLength: 14)
                         
                         TitleDescriptionView(title: .constant("Explanation"), description: .constant("Explanation content comes here"))
                             .padding(.horizontal, 16)
+                            .accessibilityIdentifier("TitleDescriptionViewExplanation")
+                        
                     }
                 }
                 .background(Color.black)
@@ -46,6 +50,7 @@ struct PictureDetailView: View {
                             Image(systemName: "xmark")
                         }
                         .accentColor(Color(.white))
+                        .accessibilityIdentifier("PictureDetailViewCloseButton")
                     }
                     ToolbarItem(placement: .principal) {
                         Text("title")
