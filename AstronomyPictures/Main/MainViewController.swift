@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         configureNaviationBarAppearance()
         configureDataSource()
+        setUpCollectionView()
         fetchData()
     }
 
@@ -24,14 +25,14 @@ class MainViewController: UIViewController {
         super.loadView()
         view = MainView()
     }
+    
+    private func setUpCollectionView() {
+        (view as? MainView)?.collectionView.delegate = self
+    }
 
     private func configureNaviationBarAppearance() {
         title = "Astronomy Picture of Days"
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)]
     }
     
     private func configureDataSource() {
@@ -61,5 +62,13 @@ class MainViewController: UIViewController {
     
     deinit {
         print("MainViewController deinit")
+    }
+}
+
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = PictureDetailHostingController()
+        vc.modalPresentationStyle = .overFullScreen
+        present(vc, animated: true)
     }
 }
