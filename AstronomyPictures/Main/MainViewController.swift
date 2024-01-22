@@ -31,7 +31,7 @@ class MainViewController: UIViewController {
     }
 
     private func configureNaviationBarAppearance() {
-        title = "Astronomy Picture of Days"
+        title = "Astronomy Pictures of Days"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)]
     }
     

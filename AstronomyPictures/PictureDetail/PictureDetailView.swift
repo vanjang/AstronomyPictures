@@ -15,7 +15,7 @@ struct PictureDetailView: View {
             NavigationView {
                 ScrollView {
                     VStack(alignment: .leading) {
-                        Image("test")
+                        Image("splash_image")
                             .resizable()
                             .scaledToFit()
                             .frame(width: geo.size.width, height: geo.size.width * 3/4)
