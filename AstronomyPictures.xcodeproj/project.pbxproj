@@ -67,6 +67,7 @@
 		A36CBB432B5DD18600CFF737 /* PictureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureDetailView.swift; sourceTree = "<group>"; };
 		A36CBB4A2B5E80B300CFF737 /* TitleDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleDescriptionView.swift; sourceTree = "<group>"; };
 		A36CBB4C2B5ED70700CFF737 /* PicturesDetailUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicturesDetailUITests.swift; sourceTree = "<group>"; };
+		A37934C62B5F11A500C0CF35 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +98,7 @@
 		A36CBAF02B5D027F00CFF737 = {
 			isa = PBXGroup;
 			children = (
+				A37934C62B5F11A500C0CF35 /* Config.xcconfig */,
 				A36CBB312B5D12F300CFF737 /* .gitignore */,
 				A36CBAFB2B5D027F00CFF737 /* AstronomyPictures */,
 				A36CBB122B5D028200CFF737 /* AstronomyPicturesTests */,
@@ -492,6 +494,7 @@
 		};
 		A36CBB242B5D028200CFF737 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A37934C62B5F11A500C0CF35 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -520,6 +523,7 @@
 		};
 		A36CBB252B5D028200CFF737 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A37934C62B5F11A500C0CF35 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
