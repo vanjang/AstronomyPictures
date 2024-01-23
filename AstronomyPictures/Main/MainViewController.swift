@@ -18,6 +18,7 @@ class MainViewController: UIViewController {
         configureNaviationBarAppearance()
         configureDataSource()
         setUpCollectionView()
+        updateLoading()
         fetchData()
     }
 
@@ -53,6 +54,14 @@ class MainViewController: UIViewController {
             .store(in: &cancellables)
     }
     
+    private func updateLoading() {
+        viewModel.$isLoading
+            .sink { [weak self] isLoading in
+                (self?.view as? MainView)?.updateLoading(isLoading: isLoading)
+            }
+            .store(in: &cancellables)
+    }
+    
     private func updateCollectionView(with items: [MainAtronomyPictureCellItem]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, MainAtronomyPictureCellItem>()
         snapshot.appendSections([.main])
@@ -67,7 +76,9 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = PictureDetailHostingController()
+        guard viewModel.items.indices.contains(indexPath.row) else { return }
+        let item = viewModel.items[indexPath.row]
+        let vc = PictureDetailHostingController(item: item.detailItem)
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
     }

@@ -9,8 +9,17 @@ import Foundation
 import Combine
 
 struct MainAtronomyPictureCellItem: Hashable {
-    var identifier = UUID()
-    let data: Data
+    let identifier = UUID()
+    
+    let url: URL
+    let detailItem: DetailItem
+    
+    struct DetailItem {
+        let url: URL
+        let title: String
+        let date: String
+        let explanation: String
+    }
     
     // Implement Hashable protocol
     func hash(into hasher: inout Hasher) {
