@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct TitleDescriptionView: View {
-    @Binding var title: String
-    @Binding var description: String
-
+    let title: String
+    let description: String
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(title)
