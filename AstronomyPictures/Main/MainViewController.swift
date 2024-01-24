@@ -9,14 +9,14 @@ import UIKit
 import Combine
 
 class MainViewController: UIViewController {
-    private var dataSource: UICollectionViewDiffableDataSource<Section, MainAtronomyPictureCellItem>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, MainAstronomyPictureCellItem>!
     private var cancellables: Set<AnyCancellable> = []
     private let viewModel = MainViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNaviationBarAppearance()
-        configureDataSource()
+        setUpNaviationBarAppearance()
+        setUpDataSource()
         setUpCollectionView()
         updateLoading()
         fetchData()
@@ -31,14 +31,14 @@ class MainViewController: UIViewController {
         (view as? MainView)?.collectionView.delegate = self
     }
 
-    private func configureNaviationBarAppearance() {
+    private func setUpNaviationBarAppearance() {
         title = "Astronomy Pictures of Days"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)]
     }
     
-    private func configureDataSource() {
+    private func setUpDataSource() {
         guard let view = self.view as? MainView else { return }
-        dataSource = UICollectionViewDiffableDataSource<Section, MainAtronomyPictureCellItem>(collectionView: view.collectionView) { collectionView, indexPath, item in
+        dataSource = UICollectionViewDiffableDataSource<Section, MainAstronomyPictureCellItem>(collectionView: view.collectionView) { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainAstronomyPictureCell.reuseIdentifier, for: indexPath) as? MainAstronomyPictureCell
             cell?.config(item: item)
                return cell

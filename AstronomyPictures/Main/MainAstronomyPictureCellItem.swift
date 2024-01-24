@@ -1,5 +1,5 @@
 //
-//  MainAtronomyPictureCellItem.swift
+//  MainAstronomyPictureCellItem.swift
 //  AstronomyPictures
 //
 //  Created by myung hoon on 21/01/2024.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-struct MainAtronomyPictureCellItem: Hashable {
+struct MainAstronomyPictureCellItem: Hashable {
     let identifier = UUID()
     
     let url: URL
@@ -26,7 +26,7 @@ struct MainAtronomyPictureCellItem: Hashable {
         hasher.combine(identifier)
     }
     
-    static func == (lhs: MainAtronomyPictureCellItem, rhs: MainAtronomyPictureCellItem) -> Bool {
+    static func == (lhs: MainAstronomyPictureCellItem, rhs: MainAstronomyPictureCellItem) -> Bool {
         return lhs.identifier == rhs.identifier
     }
 }

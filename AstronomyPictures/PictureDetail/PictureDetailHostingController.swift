@@ -11,7 +11,7 @@ import SwiftUI
 final class PictureDetailHostingController: UIViewController {
     private let vc: UIHostingController<PictureDetailView>!
     
-    init(item: MainAtronomyPictureCellItem.DetailItem) {
+    init(item: MainAstronomyPictureCellItem.DetailItem) {
         vc = UIHostingController(rootView: PictureDetailView(item: item))
         super.init(nibName: nil, bundle: nil)
         setUpHostingController()

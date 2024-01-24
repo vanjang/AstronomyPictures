@@ -11,7 +11,7 @@ import Kingfisher
 struct PictureDetailView: View {
     @Environment(\.dismiss) var dismiss
     
-    let item: MainAtronomyPictureCellItem.DetailItem
+    let item: MainAstronomyPictureCellItem.DetailItem
     
     var body: some View {
         GeometryReader { geo in
@@ -67,6 +67,6 @@ struct PictureDetailView: View {
 
 struct PictureDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PictureDetailView(item: MainAtronomyPictureCellItem.DetailItem(url: URL(string: "https://picsum.photos/200/300")!, title: "Some Random Image", date: "2024-1-23", explanation: "Some brilliant random image explanation comes here"))
+        PictureDetailView(item: MainAstronomyPictureCellItem.DetailItem(url: URL(string: "https://picsum.photos/200/300")!, title: "Some Random Image", date: "2024-1-23", explanation: "Some brilliant random image explanation comes here"))
     }
 }

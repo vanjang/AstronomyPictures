@@ -44,7 +44,7 @@ final class MainAstronomyPictureCell: UICollectionViewCell {
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
-    public func config(item: MainAtronomyPictureCellItem) {
+    public func config(item: MainAstronomyPictureCellItem) {
         imageView.kf.indicatorType = .activity
         
         imageView.kf.setImage(
