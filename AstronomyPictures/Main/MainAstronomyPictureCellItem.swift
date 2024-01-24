@@ -14,7 +14,7 @@ struct MainAstronomyPictureCellItem: Hashable {
     let url: URL
     let detailItem: DetailItem
     
-    struct DetailItem {
+    struct DetailItem: Equatable {
         let url: URL
         let title: String
         let date: String

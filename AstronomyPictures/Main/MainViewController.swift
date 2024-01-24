@@ -11,15 +11,15 @@ import Combine
 class MainViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, MainAstronomyPictureCellItem>!
     private var cancellables: Set<AnyCancellable> = []
-    private let viewModel = MainViewModel()
+    private let viewModel = MainViewModel(networkService: NetworkService(),
+                                          logic: MainViewModelLogic(paginationManager: PaginationManager()))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNaviationBarAppearance()
         setUpDataSource()
         setUpCollectionView()
-        updateLoading()
-        fetchData()
+        bind()
     }
 
     override func loadView() {
@@ -27,6 +27,12 @@ class MainViewController: UIViewController {
         view = MainView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        notifyViewWillAppear()
+    }
+    
+    // setUp functions
     private func setUpCollectionView() {
         (view as? MainView)?.collectionView.delegate = self
     }
@@ -44,29 +50,45 @@ class MainViewController: UIViewController {
                return cell
            }
        }
-
-    private func fetchData() {
-        viewModel.$items
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: { [weak self] items in
-                    self?.updateCollectionView(with: items)
-                  })
-            .store(in: &cancellables)
+    
+    // observers
+    private func notifyViewWillAppear() {
+        viewModel.viewWillAppear.send(())
     }
     
-    private func updateLoading() {
+    private func notifyDidScrollReachEnd() {
+        viewModel.didScroll.send(())
+    }
+    
+    // binder
+    private func bind() {
+        // dataSource stream
+        viewModel.$items
+            .sink { [weak self] items in
+                var snapshot = NSDiffableDataSourceSnapshot<Section, MainAstronomyPictureCellItem>()
+                snapshot.appendSections([.main])
+                snapshot.appendItems(items)
+                self?.dataSource.apply(snapshot, animatingDifferences: true)
+            }
+            .store(in: &cancellables)
+        
+        // loading status stream
         viewModel.$isLoading
             .sink { [weak self] isLoading in
                 (self?.view as? MainView)?.updateLoading(isLoading: isLoading)
             }
             .store(in: &cancellables)
-    }
-    
-    private func updateCollectionView(with items: [MainAtronomyPictureCellItem]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, MainAtronomyPictureCellItem>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(items)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        
+        // error stream
+        viewModel.$error
+            .compactMap { $0 }
+            .sink { [weak self] error in
+                let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "OK", style: .default)
+                alert.addAction(ok)
+                self?.present(alert, animated: true)
+            }
+            .store(in: &cancellables)
     }
     
     deinit {
@@ -76,10 +98,21 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard viewModel.items.indices.contains(indexPath.row) else { return }
-        let item = viewModel.items[indexPath.row]
+        let snapshot = dataSource.snapshot()
+        guard snapshot.itemIdentifiers.indices.contains(indexPath.row) else { return }
+        let item = snapshot.itemIdentifiers[indexPath.row]
         let vc = PictureDetailHostingController(item: item.detailItem)
         vc.modalPresentationStyle = .overFullScreen
         present(vc, animated: true)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let screenHeight = scrollView.frame.size.height
+
+        if offsetY > contentHeight - screenHeight {
+            notifyDidScrollReachEnd()
+        }
     }
 }
