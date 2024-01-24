@@ -9,8 +9,44 @@ import XCTest
 import Combine
 @testable import AstronomyPictures
 
+enum TestError: Error {
+    case test
+}
+
 final class MainViewModelTests: XCTestCase {
     var cancellables: Set<AnyCancellable> = []
+    
+    override func tearDownWithError() throws {
+        cancellables.removeAll()
+    }
+    
+    func testViewModelError() throws {
+        // Given
+        let mockNetworkService = MockNetworkService(responseData: mockData, responseError: TestError.test)
+        let paginationManager = PaginationManager()
+        let logic = MainViewModelLogic(paginationManager: paginationManager)
+        let viewModel = MainViewModel(networkService: mockNetworkService, logic: logic)
+        
+        // When
+        let expectation = XCTestExpectation(description: "ViewModel error")
+        var error: Error? = nil
+        viewModel.$error
+            .compactMap { $0 } // default is nil so ignore it
+            .sink { err in
+                error = err
+                expectation.fulfill()
+            }
+            .store(in: &cancellables)
+        
+        // Trigger viewWillAppear
+        viewModel.viewWillAppear.send(())
+        
+        // Wait for expectations
+        wait(for: [expectation], timeout: 1.0)
+        
+        // Check whether error has value
+        XCTAssertNotNil(error)
+    }
     
     func testViewModelInitialization() {
         // Given

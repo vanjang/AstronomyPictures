@@ -125,7 +125,7 @@ final class MainViewModelLogicTests: XCTestCase {
             // check both detail items are identical
             XCTAssertEqual(detailItems, sortedDetailItems)
         } else {
-            XCTSkip("test links are not valid any more - get another valid link!")
+            _ = XCTSkip("test links are not valid any more - get another valid link!")
         }
         
     }
@@ -145,7 +145,6 @@ final class MainViewModelLogicTests: XCTestCase {
         
         XCTAssertEqual(result, expectedDateString)
     }
-    
     
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
