@@ -23,7 +23,7 @@ final class MainViewUITests: XCTestCase {
         let navBar = app.navigationBars.element
         XCTAssert(navBar.exists)
         
-        let title = "Astronomy Picture of Days"
+        let title = "Astronomy Pictures of Days"
         let navBarTitle = app.staticTexts[title]
         XCTAssert(navBarTitle.exists, "The navigationBar title should be \(title)")
     }

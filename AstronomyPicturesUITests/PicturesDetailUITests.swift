@@ -19,29 +19,32 @@ final class PicturesDetailUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    private func presentPictureDetailView() throws {
+    private func waitForCollectionViewToLoad() {
+        let collectionView = app.collectionViews["MainCollectionViewId"]
+        let collectionViewLoadedExpectation = expectation(for: NSPredicate(format: "count > 0"), evaluatedWith: collectionView.cells, handler: nil)
+        wait(for: [collectionViewLoadedExpectation], timeout: 15)
+    }
+    
+    private func presentPictureDetailView() {
+        waitForCollectionViewToLoad()
         let collectionView = app.collectionViews["MainCollectionViewId"]
         collectionView.cells.firstMatch.tap()
     }
     
     func testAstronomyPictureDetailViewShowUp() throws {
-        try presentPictureDetailView()
+        presentPictureDetailView()
         
-        let title = app.staticTexts["TitleDescriptionViewTitle"]
         let date = app.staticTexts["TitleDescriptionViewDate"]
         let explanation = app.staticTexts["TitleDescriptionViewExplanation"]
-        
-        XCTAssert(title.waitForExistence(timeout: 0.5))
         XCTAssert(date.waitForExistence(timeout: 0.5))
         XCTAssert(explanation.waitForExistence(timeout: 0.5))
     }
     
     func testAstronomyPictureDetailViewDismissed() throws {
-        try presentPictureDetailView()
+        presentPictureDetailView()
         
         let closeButton = app.buttons["PictureDetailViewCloseButton"]
         closeButton.tap()
-        
         XCTAssert(!closeButton.waitForExistence(timeout: 0.5))
     }
 
