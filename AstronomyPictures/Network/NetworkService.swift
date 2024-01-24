@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-struct NetworkService: APIRequest {
+struct NetworkService: NetworkServiceType {
     func request<T: Decodable>(_ endpoint: Endpoint) -> AnyPublisher<T, Error> {
             guard let url = URL(string: "\(endpoint.baseURL)\(endpoint.path)") else {
                 return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
@@ -36,4 +36,3 @@ struct NetworkService: APIRequest {
                 .eraseToAnyPublisher()
         }
 }
-
