@@ -9,89 +9,38 @@ import Foundation
 import Combine
 
 final class MainViewModel: ObservableObject {
-    @Published var items: [MainAtronomyPictureCellItem] = []
-    private var cancellables: Set<AnyCancellable> = []
+    // Inputs
+    let viewWillAppear = PassthroughSubject<Void, Never>()
+    let didScroll = PassthroughSubject<Void, Never>()
     
-    init() {
-        fetchData()
-    }
+    // Outputs
+    @Published private(set) var items: [MainAstronomyPictureCellItem] = []
+    @Published private(set) var isLoading: Bool = false
+    @Published private(set) var error: Error? = nil
     
-    private func fetchData() {
-        let url = URL(string: "https://picsum.photos/200/300")!
+    init(networkService: NetworkServiceType, logic: MainViewModelLogic) {
+        let useCase = APODUseCase(networkService: networkService)
         
-        // dummy data for UI testing
-        URLSession.shared.dataTaskPublisher(for: url)
-            .eraseToAnyPublisher()
-            .map { e -> [MainAtronomyPictureCellItem] in
-                [
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data),
-                    MainAtronomyPictureCellItem(data: e.data)
-                ]
-            }
-        .eraseToAnyPublisher()
-        .receive(on: DispatchQueue.main)
-        .sink(receiveCompletion: { _ in },
-              receiveValue: { [weak self] items in
-            self?.items = items
-        })
-        .store(in: &cancellables)
+        // loading stream
+        Publishers.Merge3(viewWillAppear.eraseToAnyPublisher().map { _ in true },
+                          didScroll.eraseToAnyPublisher().map { _ in true },
+                          $items.eraseToAnyPublisher().dropFirst().map { _ in false }).eraseToAnyPublisher()
+            .assign(to: &$isLoading)
+        
+        // APODs stream
+        Publishers.Merge(viewWillAppear.eraseToAnyPublisher(),
+                         didScroll.debounce(for: .milliseconds(1000), scheduler: DispatchQueue.main).eraseToAnyPublisher())
+        .flatMap { _ -> AnyPublisher<[MainAstronomyPictureCellItem], Error> in
+            useCase.fetchAPODs(endPoint: logic.getAPODEndPoint(method: .get))
+                .receive(on: DispatchQueue.main)
+                .compactMap { logic.getCellItems(with: $0) }
+                .eraseToAnyPublisher()
+        }
+        .scan([]) { $0 + $1 }
+        .catch { [weak self] error in
+            self?.error = error
+            return Just([MainAstronomyPictureCellItem]())
+        }
+        .assign(to: &$items)
     }
-    
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
-}
-
-enum Section {
-    case main
 }

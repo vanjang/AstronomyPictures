@@ -33,6 +33,9 @@ DerivedData/
 ## DS_Store
 **/.DS_Store
 
+## Configurations
+*.xcconfig
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace

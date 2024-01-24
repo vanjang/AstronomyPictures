@@ -18,6 +18,14 @@ final class MainView: UIView {
     }
     
     @UsesAutoLayout
+    private var loadingIndicator: UIActivityIndicatorView = {
+        let v = UIActivityIndicatorView(style: .medium)
+        v.hidesWhenStopped = true
+        v.color = .white
+        return v
+    }()
+    
+    @UsesAutoLayout
     public var collectionView: UICollectionView = {
         let layout: UICollectionViewCompositionalLayout = {
             UICollectionViewCompositionalLayout { (sectionIndex: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -50,13 +58,25 @@ final class MainView: UIView {
     
     private func setUpUI() {
         addSubview(collectionView)
+        addSubview(loadingIndicator)
         
         collectionView.backgroundColor = .black
+        
+        loadingIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        loadingIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         collectionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
+    
+    public func updateLoading(isLoading: Bool) {
+        if isLoading {
+            loadingIndicator.startAnimating()
+        } else {
+            loadingIndicator.stopAnimating()
+        }
     }
     
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class MainAstronomyPictureCell: UICollectionViewCell {
     static let reuseIdentifier = "MainAstronomyPictureCell"
@@ -19,6 +20,11 @@ final class MainAstronomyPictureCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
     }
     
     @UsesAutoLayout
@@ -38,7 +44,16 @@ final class MainAstronomyPictureCell: UICollectionViewCell {
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
-    public func config(item: MainAtronomyPictureCellItem) {
-        imageView.image = UIImage(data: item.data)
+    public func config(item: MainAstronomyPictureCellItem) {
+        imageView.kf.indicatorType = .activity
+        
+        imageView.kf.setImage(
+            with: item.url,
+            options: [
+                .processor(DownsamplingImageProcessor(size: frame.size)),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(0.4)),
+                .cacheOriginalImage
+            ])
     }
 }

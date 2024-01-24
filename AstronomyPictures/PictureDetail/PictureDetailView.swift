@@ -6,35 +6,37 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PictureDetailView: View {
     @Environment(\.dismiss) var dismiss
+    
+    let item: MainAstronomyPictureCellItem.DetailItem
     
     var body: some View {
         GeometryReader { geo in
             NavigationView {
                 ScrollView {
                     VStack(alignment: .leading) {
-                        Image("splash_image")
+                        KFImage(item.url)
+                            .placeholder{
+                                   ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
+                               }
                             .resizable()
                             .scaledToFit()
                             .frame(width: geo.size.width, height: geo.size.width * 3/4)
-                            .clipped()
                             .padding(.bottom, 10)
 
-                        TitleDescriptionView(title: .constant("Title"), description: .constant("Very long Description for test, very very long Description"))
-                            .padding(.horizontal, 16)
-                            .accessibilityIdentifier("TitleDescriptionViewTitle")
-                        
                         Spacer(minLength: 14)
                         
-                        TitleDescriptionView(title: .constant("Date"), description: .constant("Description"))
+                        TitleDescriptionView(title: "Date", description: item.date)
                             .padding(.horizontal, 16)
                             .accessibilityIdentifier("TitleDescriptionViewDate")
                         
                         Spacer(minLength: 14)
                         
-                        TitleDescriptionView(title: .constant("Explanation"), description: .constant("Explanation content comes here"))
+                        TitleDescriptionView(title: "Explanation", description: item.explanation)
                             .padding(.horizontal, 16)
                             .accessibilityIdentifier("TitleDescriptionViewExplanation")
                         
@@ -53,7 +55,7 @@ struct PictureDetailView: View {
                         .accessibilityIdentifier("PictureDetailViewCloseButton")
                     }
                     ToolbarItem(placement: .principal) {
-                        Text("title")
+                        Text(item.title)
                             .font(.system(size: 17))
                             .foregroundColor(Color(.white))
                     }
@@ -65,6 +67,6 @@ struct PictureDetailView: View {
 
 struct PictureDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PictureDetailView()
+        PictureDetailView(item: MainAstronomyPictureCellItem.DetailItem(url: URL(string: "https://picsum.photos/200/300")!, title: "Some Random Image", date: "2024-1-23", explanation: "Some brilliant random image explanation comes here"))
     }
 }
