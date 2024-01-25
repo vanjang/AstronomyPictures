@@ -30,12 +30,15 @@ final class MainViewModel: ObservableObject {
                         useCase.fetchAPODs(endPoint: logic.getAPODEndPoint(method: .get))
                             .receive(on: DispatchQueue.main)
                             .compactMap { logic.getCellItems(with: $0) }
+                            .catch({ er in
+                                error.send(er)
+                                return Empty<[MainAstronomyPictureCellItem], Error>(completeImmediately: false)
+                            })
                             .eraseToAnyPublisher()
                     }
                     .scan([]) { $0 + $1 }
-                    .catch { er in
-                        error.send(er)
-                        return Empty<[MainAstronomyPictureCellItem], Never>()
+                    .catch { _ in
+                        Empty<[MainAstronomyPictureCellItem], Never>()
                     }
                     .share()
         
