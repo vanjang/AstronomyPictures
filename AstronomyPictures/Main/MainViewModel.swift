@@ -10,37 +10,41 @@ import Combine
 
 final class MainViewModel: ObservableObject {
     // Inputs
-    let viewWillAppear = PassthroughSubject<Void, Never>()
+    let fetch = PassthroughSubject<Void, Never>()
     let didScroll = PassthroughSubject<Void, Never>()
     
     // Outputs
     @Published private(set) var items: [MainAstronomyPictureCellItem] = []
-    @Published private(set) var isLoading: Bool = false
-    @Published private(set) var error: Error? = nil
+    @Published private(set) var viewState: ViewState = .empty
     
     init(networkService: NetworkServiceType, logic: MainViewModelLogic) {
         let useCase = APODUseCase(networkService: networkService)
         
-        // loading stream
-        Publishers.Merge3(viewWillAppear.eraseToAnyPublisher().map { _ in true },
-                          didScroll.eraseToAnyPublisher().map { _ in true },
-                          $items.eraseToAnyPublisher().dropFirst().map { _ in false }).eraseToAnyPublisher()
-            .assign(to: &$isLoading)
+        let error = CurrentValueSubject<Error?, Never>(nil)
         
-        // APODs stream
-        Publishers.Merge(viewWillAppear.eraseToAnyPublisher(),
-                         didScroll.debounce(for: .milliseconds(1000), scheduler: DispatchQueue.main).eraseToAnyPublisher())
-        .flatMap { _ -> AnyPublisher<[MainAstronomyPictureCellItem], Error> in
-            useCase.fetchAPODs(endPoint: logic.getAPODEndPoint(method: .get))
-                .receive(on: DispatchQueue.main)
-                .compactMap { logic.getCellItems(with: $0) }
-                .eraseToAnyPublisher()
-        }
-        .scan([]) { $0 + $1 }
-        .catch { [weak self] error in
-            self?.error = error
-            return Just([MainAstronomyPictureCellItem]())
-        }
-        .assign(to: &$items)
+        let didScroll = didScroll.debounce(for: .milliseconds(250), scheduler: DispatchQueue.main).share()
+        
+        let items = Publishers.Merge(fetch.eraseToAnyPublisher(),
+                                     didScroll.eraseToAnyPublisher())
+                    .flatMap { _ -> AnyPublisher<[MainAstronomyPictureCellItem], Error> in
+                        useCase.fetchAPODs(endPoint: logic.getAPODEndPoint(method: .get))
+                            .receive(on: DispatchQueue.main)
+                            .compactMap { logic.getCellItems(with: $0) }
+                            .eraseToAnyPublisher()
+                    }
+                    .scan([]) { $0 + $1 }
+                    .catch { er in
+                        error.send(er)
+                        return Empty<[MainAstronomyPictureCellItem], Never>()
+                    }
+                    .share()
+        
+        // bindings
+        items.assign(to: &$items)
+     
+        Publishers.Merge3(items.map { $0.isEmpty ? ViewState.empty : ViewState.populated},
+                          Publishers.Merge(fetch, didScroll).eraseToAnyPublisher().map { _ in ViewState.loading },
+                          error.compactMap { $0 }.map { _ in ViewState.error })
+        .assign(to: &$viewState)
     }
 }

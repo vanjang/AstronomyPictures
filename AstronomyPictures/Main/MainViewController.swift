@@ -19,6 +19,7 @@ class MainViewController: UIViewController {
         setUpNaviationBarAppearance()
         setUpDataSource()
         setUpCollectionView()
+        setUpStateButtonAction()
         bind()
     }
 
@@ -29,7 +30,7 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        notifyViewWillAppear()
+        notifyStartFetching()
     }
     
     // setUp functions
@@ -52,16 +53,28 @@ class MainViewController: UIViewController {
        }
     
     // observers
-    private func notifyViewWillAppear() {
-        viewModel.viewWillAppear.send(())
+    @objc private func notifyStartFetching() {
+        viewModel.fetch.send(())
     }
     
     private func notifyDidScrollReachEnd() {
         viewModel.didScroll.send(())
     }
     
+    // button action
+    private func setUpStateButtonAction() {
+        (view as? MainView)?.stateButton.addTarget(self, action: #selector(notifyStartFetching), for: .touchUpInside)
+    }
+    
     // binder
     private func bind() {
+        // view status stream
+        viewModel.$viewState
+            .sink { [weak self] state in
+                (self?.view as? MainView)?.updateViewState(state)
+            }
+            .store(in: &cancellables)
+        
         // dataSource stream
         viewModel.$items
             .sink { [weak self] items in
@@ -69,24 +82,6 @@ class MainViewController: UIViewController {
                 snapshot.appendSections([.main])
                 snapshot.appendItems(items)
                 self?.dataSource.apply(snapshot, animatingDifferences: true)
-            }
-            .store(in: &cancellables)
-        
-        // loading status stream
-        viewModel.$isLoading
-            .sink { [weak self] isLoading in
-                (self?.view as? MainView)?.updateLoading(isLoading: isLoading)
-            }
-            .store(in: &cancellables)
-        
-        // error stream
-        viewModel.$error
-            .compactMap { $0 }
-            .sink { [weak self] error in
-                let alert = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-                let ok = UIAlertAction(title: "OK", style: .default)
-                alert.addAction(ok)
-                self?.present(alert, animated: true)
             }
             .store(in: &cancellables)
     }

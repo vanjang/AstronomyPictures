@@ -24,7 +24,7 @@ struct MockNetworkService: NetworkServiceType {
         }
         
         guard let responseData = responseData else {
-            fatalError("Test data should be provided to test when data exists")
+            return Fail(error: TestError.test).eraseToAnyPublisher()
         }
 
         do {

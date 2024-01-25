@@ -26,6 +26,16 @@ final class MainView: UIView {
     }()
     
     @UsesAutoLayout
+    var stateButton: UIButton = {
+       let button = UIButton()
+        button.titleLabel?.font = .systemFont(ofSize: 14)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.textAlignment = .center
+        return button
+    }()
+    
+    @UsesAutoLayout
     public var collectionView: UICollectionView = {
         let layout: UICollectionViewCompositionalLayout = {
             UICollectionViewCompositionalLayout { (sectionIndex: Int, environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -53,14 +63,17 @@ final class MainView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(MainAstronomyPictureCell.self, forCellWithReuseIdentifier: MainAstronomyPictureCell.reuseIdentifier)
         collectionView.accessibilityIdentifier = "MainCollectionViewId"
+        collectionView.backgroundColor = .black
         return collectionView
     }()
     
     private func setUpUI() {
         addSubview(collectionView)
         addSubview(loadingIndicator)
+        addSubview(stateButton)
         
-        collectionView.backgroundColor = .black
+        stateButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        stateButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         loadingIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         loadingIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -71,12 +84,26 @@ final class MainView: UIView {
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
-    public func updateLoading(isLoading: Bool) {
-        if isLoading {
-            loadingIndicator.startAnimating()
-        } else {
+    public func updateViewState(_ state: ViewState) {
+        switch state {
+        case .empty:
+            stateButton.isHidden = false
+            stateButton.setTitle("No images found.\nTap to retry", for: .normal)
             loadingIndicator.stopAnimating()
+            collectionView.isHidden = true
+        case .error:
+            stateButton.isHidden = false
+            stateButton.setTitle("Error occurred.\nTap to retry", for: .normal)
+            loadingIndicator.stopAnimating()
+            collectionView.isHidden = true
+        case .populated:
+            stateButton.isHidden = true
+            loadingIndicator.stopAnimating()
+            collectionView.isHidden = false
+        case .loading:
+            stateButton.isHidden = true
+            loadingIndicator.startAnimating()
+            collectionView.isHidden = false
         }
     }
-    
 }
