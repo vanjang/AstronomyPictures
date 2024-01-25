@@ -17,6 +17,8 @@ final class MainView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UI Components
+    
     @UsesAutoLayout
     private var loadingIndicator: UIActivityIndicatorView = {
         let v = UIActivityIndicatorView(style: .medium)
@@ -67,6 +69,8 @@ final class MainView: UIView {
         return collectionView
     }()
     
+    // MARK: - UI Set Up Function
+    
     private func setUpUI() {
         addSubview(collectionView)
         addSubview(loadingIndicator)
@@ -83,6 +87,8 @@ final class MainView: UIView {
         collectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
+    
+    // MARK: - Update UI Function
     
     public func updateViewState(_ state: ViewState) {
         switch state {

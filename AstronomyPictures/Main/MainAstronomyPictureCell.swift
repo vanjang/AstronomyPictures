@@ -11,6 +11,8 @@ import Kingfisher
 final class MainAstronomyPictureCell: UICollectionViewCell {
     static let reuseIdentifier = "MainAstronomyPictureCell"
     
+    // MARK: - Life Cycles
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         accessibilityIdentifier = "MainAstronomyPictureCell"
@@ -27,6 +29,8 @@ final class MainAstronomyPictureCell: UICollectionViewCell {
         imageView.image = nil
     }
     
+    // MARK: - UI Component
+    
     @UsesAutoLayout
     private var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -34,6 +38,8 @@ final class MainAstronomyPictureCell: UICollectionViewCell {
         imageView.clipsToBounds = true
         return imageView
     }()
+    
+    // MARK: - UI Set Up Function
     
     private func setUpUI() {
         contentView.addSubview(imageView)
@@ -43,6 +49,8 @@ final class MainAstronomyPictureCell: UICollectionViewCell {
         imageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
+    
+    // MARK: - Configuration Function
     
     public func config(item: MainAstronomyPictureCellItem) {
         imageView.kf.indicatorType = .activity

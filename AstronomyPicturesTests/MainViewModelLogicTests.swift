@@ -36,12 +36,12 @@ final class MainViewModelLogicTests: XCTestCase {
         let endPoint = endPointTestLogic.getAPODEndPoint(method: httpMethod)
         let parameters = endPoint.parameters
         
-        // startDate is a date before n days
+        // StartDate is a date before n days
         let nextDate = parameters?.first(where: { $0.name == "start_date" })?.value as? String ?? ""
         let nextDateString = endPointTestLogic.getDateString(before: -10)
         XCTAssertEqual(nextDate, nextDateString)
         
-        // endDate is a date starting a query
+        // EndDate is a date starting a query
         let currentDate = parameters?.first(where: { $0.name == "end_date" })?.value as? String ?? ""
         let currentDateString = endPointTestLogic.getDateString(before: 0)
         XCTAssertEqual(currentDate, currentDateString)
@@ -65,14 +65,14 @@ final class MainViewModelLogicTests: XCTestCase {
     }
     
     func testCellItems() throws {
-        // given
-        // image urls
+        // Given
+        // Image urls
         let cat = "https://i.imgur.com/CzXTtJV.jpg"
         let dog = "https://i.imgur.com/OB0y6MR.jpg"
         let cheetah = "https://farm2.staticflickr.com/1533/26541536141_41abe98db3_z_d.jpeg"
         let bird = "https://farm4.staticflickr.com/3075/3168662394_7d7103de7d_z_d.jpg"
         
-        // video urls
+        // Video urls
         let bunny = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         let elephant = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp"
         
@@ -81,19 +81,19 @@ final class MainViewModelLogicTests: XCTestCase {
         let cheetahURL = URL(string: cheetah)
         let birdURL = URL(string: bird)
         
-        // check the given sample URLs are valid
+        // Check the given sample URLs are valid
         XCTAssertNotNil(catURL)
         XCTAssertNotNil(dogURL)
         XCTAssertNotNil(cheetahURL)
         XCTAssertNotNil(birdURL)
         
-        // falt url
+        // Falt url
         let falt = ""
         
         let allImageLinksValid = catURL != nil && dogURL != nil && cheetahURL != nil && birdURL != nil
         
         if allImageLinksValid {
-            // when
+            // When
             let apods: [APOD] = [
                 APOD(copyright: nil, date: "2023-02-01", explanation: "explanation1", hdurl: cat, title: "title1", url: cat),
                 APOD(copyright: nil, date: "2023-02-10", explanation: "explanation2", hdurl: bunny, title: "title2", url: bunny),
@@ -106,23 +106,23 @@ final class MainViewModelLogicTests: XCTestCase {
             
             let cellItems = logic.getCellItems(with: apods)
             
-            // check cell items are correctly excluding urls without .jpg suffix
+            // Check cell items are correctly excluding urls without .jpg suffix
             XCTAssert(cellItems.count == 4)
             
-            // then
+            // Then
             let testingCellItems: [MainAstronomyPictureCellItem] = [
                 MainAstronomyPictureCellItem(url: cheetahURL!, detailItem: MainAstronomyPictureCellItem.DetailItem(url: cheetahURL!, title: "title4", date: "2023-01-02", explanation: "explanation4")),
                 MainAstronomyPictureCellItem(url: dogURL!, detailItem: MainAstronomyPictureCellItem.DetailItem(url: dogURL!, title: "title3", date: "2023-01-11", explanation: "explanation3")),
                 MainAstronomyPictureCellItem(url: catURL!, detailItem: MainAstronomyPictureCellItem.DetailItem(url: catURL!, title: "title1", date: "2023-02-01", explanation: "explanation1")),
                 MainAstronomyPictureCellItem(url: birdURL!, detailItem: MainAstronomyPictureCellItem.DetailItem(url: birdURL!, title: "title7", date: "2023-07-02", explanation: "explanation7"))
             ]
-            // check both items are NOT identical
+            // Check both items are NOT identical
             XCTAssertNotEqual(cellItems, testingCellItems)
             
-            // due to cellItem's ID(for hashable) it is always NOT equal, so extracted detail items to compare
+            // Due to cellItem's ID(for hashable) it is always NOT equal, so extracted detail items to compare
             let detailItems = cellItems.map { $0.detailItem }
             let sortedDetailItems = testingCellItems.sorted { $0.detailItem.date > $1.detailItem.date }.map { $0.detailItem }
-            // check both detail items are identical
+            // Check both detail items are identical
             XCTAssertEqual(detailItems, sortedDetailItems)
         } else {
             _ = XCTSkip("test links are not valid any more - get another valid link!")

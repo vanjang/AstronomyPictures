@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-// Blueprinting the conformances of Astronomy Picture Of the Day API usage
+// Blueprinting APOD API usage
 protocol APODUseCaseType {
     func fetchAPODs(endPoint: APODEndpoint) -> AnyPublisher<[APOD], Error>
     func fetchAPOD(endPoint: APODEndpoint) -> AnyPublisher<APOD, Error>
