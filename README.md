@@ -11,9 +11,9 @@ This project utilises NASA's [Astronomy Picture of the Day(APOD)](https://api.na
 
 **Key Features**
 
-- This is a fairly simple app consisting of two parts; Pitures and their detail pages.
+- This is a fairly simple app consisting of two parts; Main page with space images and their detail pages.
 - You can see the detailed explanation and HD quality picture by clicking on each image.
-- Pictures are paginated so you will see more as you scroll down.
+- The images are paginated so you will see more as you scroll down.
 
 
 **Tech Stack**
