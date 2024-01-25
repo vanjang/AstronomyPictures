@@ -17,6 +17,7 @@ final class APODUseCase {
 }
 
 extension APODUseCase: APODUseCaseType {
+    // A request to retrieve images in specified dates
     func fetchAPODs(endPoint: APODEndpoint) -> AnyPublisher<[APOD], Error> {
         networkService.request(endPoint)
             .receive(on: DispatchQueue.main)
@@ -24,6 +25,7 @@ extension APODUseCase: APODUseCaseType {
             .eraseToAnyPublisher()
     }
     
+    // A request to retrieve an image on a specified date(not in use yet)
     func fetchAPOD(endPoint: APODEndpoint) -> AnyPublisher<APOD, Error> {
         networkService.request(endPoint)
             .receive(on: DispatchQueue.main)

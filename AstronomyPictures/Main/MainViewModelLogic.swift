@@ -36,13 +36,16 @@ struct MainViewModelLogic {
     
     func getCellItems(with apods: [APOD]) -> [MainAstronomyPictureCellItem] {
         apods
+            // Filter images only
             .filter({ $0.url.hasSuffix(".jpg") || $0.url.hasSuffix(".jpeg") })
+            // For detail view use HD Image url if available
             .compactMap { apod -> MainAstronomyPictureCellItem? in
                 guard let url = URL(string: apod.url) else { return nil }
                 let hdUrl = URL(string: apod.hdurl ?? "") ?? url
                 let detailItem = MainAstronomyPictureCellItem.DetailItem(url: hdUrl, title: apod.title, date: apod.date, explanation: apod.explanation)
                 return MainAstronomyPictureCellItem(url: url, detailItem: detailItem)
             }
+            // Sorting in descending order
             .sorted { $0.detailItem.date > $1.detailItem.date }
     }
     

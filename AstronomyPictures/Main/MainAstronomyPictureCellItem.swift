@@ -21,7 +21,6 @@ struct MainAstronomyPictureCellItem: Hashable {
         let explanation: String
     }
     
-    // Implement Hashable protocol
     func hash(into hasher: inout Hasher) {
         hasher.combine(identifier)
     }

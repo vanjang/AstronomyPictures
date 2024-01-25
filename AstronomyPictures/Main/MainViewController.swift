@@ -9,10 +9,17 @@ import UIKit
 import Combine
 
 class MainViewController: UIViewController {
+    
+    // MARK: - Properties
+    
     private var dataSource: UICollectionViewDiffableDataSource<Section, MainAstronomyPictureCellItem>!
+    
     private var cancellables: Set<AnyCancellable> = []
+    
     private let viewModel = MainViewModel(networkService: NetworkService(),
                                           logic: MainViewModelLogic(paginationManager: PaginationManager()))
+    
+    // MARK: - Life Cycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +40,8 @@ class MainViewController: UIViewController {
         notifyStartFetching()
     }
     
-    // setUp functions
+    // MARK: - Set Up Functions
+    
     private func setUpCollectionView() {
         (view as? MainView)?.collectionView.delegate = self
     }
@@ -52,7 +60,8 @@ class MainViewController: UIViewController {
            }
        }
     
-    // observers
+    // MARK: - Observers
+    
     @objc private func notifyStartFetching() {
         viewModel.fetch.send(())
     }
@@ -61,12 +70,14 @@ class MainViewController: UIViewController {
         viewModel.didScroll.send(())
     }
     
-    // button action
+    // MARK: - Button action
+    
     private func setUpStateButtonAction() {
         (view as? MainView)?.stateButton.addTarget(self, action: #selector(notifyStartFetching), for: .touchUpInside)
     }
     
-    // binder
+    // MARK: - Binder
+    
     private func bind() {
         // view status stream
         viewModel.$viewState
@@ -87,9 +98,12 @@ class MainViewController: UIViewController {
     }
     
     deinit {
+        cancellables.removeAll()
         print("MainViewController deinit")
     }
 }
+
+// MARK: - CollectionView Delegate Methods
 
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

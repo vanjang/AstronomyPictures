@@ -9,11 +9,14 @@ import Foundation
 import Combine
 
 final class MainViewModel: ObservableObject {
-    // Inputs
+    
+    // MARK: - Inputs
+    
     let fetch = PassthroughSubject<Void, Never>()
     let didScroll = PassthroughSubject<Void, Never>()
     
-    // Outputs
+    // MARK: - Outputs
+    
     @Published private(set) var items: [MainAstronomyPictureCellItem] = []
     @Published private(set) var viewState: ViewState = .empty
     
@@ -42,7 +45,8 @@ final class MainViewModel: ObservableObject {
                     }
                     .share()
         
-        // bindings
+        // MARK: - Binders
+        
         items.assign(to: &$items)
      
         Publishers.Merge3(items.map { $0.isEmpty ? ViewState.empty : ViewState.populated},
