@@ -26,3 +26,15 @@ Pictures are paginated so you will see more as you scroll down.
 - Unit Testing
 - UI Testing
 - Kingfisher library is imported for displaying remote images
+
+
+**Project Structure**
+
+- Main: The app's main view, accompanied by the View, ViewModel, and its logic.
+- PictureDetail: Each image's detail page, accompanied by the View, ViewModel, and its logic.
+- Network: The network layer with its protocols.
+- APODUseCase: Defines the core usages of the APOD API.
+- Model: Contains the data models used in the project.
+- PropertyWrapper: Includes custom property wrappers.
+- Util: Holds utility functions and classes. Currently, there is only PaginationManager that assists with API requests using offset.
+ 
