@@ -6,7 +6,7 @@ This project utilises NASA's [Astronomy Picture of the Day(APOD)](https://api.na
 
 **How to install**
 
-- To run the project, just clone the [repository](https://github.com/vanjang/AstronomyPictures.git) and you are good to go.
+- To run the project, just clone the [repository](https://github.com/vanjang/AstronomyPictures.git) and run, then you are good to go.
 
 
 **Key Features**
