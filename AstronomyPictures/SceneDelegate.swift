@@ -20,6 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = UINavigationController(rootViewController: MainViewController())
         window?.makeKeyAndVisible()
+        
+        // Configure cache capacity
+        let memoryCapacity = 20 * 1024 * 1024 // 20 MB
+        let diskCapacity = 100 * 1024 * 1024 // 100 MB
+        URLCache.configSharedCache(memory: memoryCapacity, disk: diskCapacity)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
