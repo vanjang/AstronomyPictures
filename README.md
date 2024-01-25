@@ -1,7 +1,8 @@
 # AstronomyPictures
 
-Astronomy Pictures is an iOS application project that shares amazing images related to space.
+Astronomy Pictures is an iOS project that shares amazing images related to space.
 This project utilises NASA's [Astronomy Picture of the Day(APOD)](https://api.nasa.gov/) API to fetch and display a new space image every day.
+
 I have used UIKit + RxSwift for the company I worked for and my projects, therefore this is my first project that I adoped SwiftUI + Combine. I hope you keep this in mind when you have a chance to review my code.
 
 _Note on 2024.1.25_
@@ -34,8 +35,8 @@ _Note on 2024.1.25_
 
 **Project Structure**
 
-- Main: The app's main view, accompanied by the View, ViewModel, and its logic.
-- PictureDetail: Each image's detail page, accompanied by the View, ViewModel, and its logic.
+- Main: The app's main view, accompanied by views, viewModel, and its logic.
+- PictureDetail: Each image's detail page, accompanied by SwiftUI views and a HostingViewController.
 - Network: The network layer with its protocols.
 - APODUseCase: Defines the core usages of the APOD API.
 - Model: Contains the data models used in the project.
