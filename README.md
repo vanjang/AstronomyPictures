@@ -4,6 +4,9 @@ Astronomy Pictures is an iOS application project that shares amazing images rela
 This project utilises NASA's [Astronomy Picture of the Day(APOD)](https://api.nasa.gov/) API to fetch and display a new space image every day.
 I have used UIKit + RxSwift for the company I worked for and my projects, therefore this is my first project that I adoped SwiftUI + Combine. I hope you keep this in mind when you have a chance to review my code.
 
+Note on 2024.1.25
+- API response time is slow at 4.5 - 5.0 seconds
+- Cacheing will be added
 
 **How to install**
 
