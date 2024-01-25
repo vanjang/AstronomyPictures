@@ -28,7 +28,7 @@ This project utilises NASA's [Astronomy Picture of the Day(APOD)](https://api.na
 - Kingfisher library is imported for displaying remote images
 
 
-** Project Structure**
+**Structure**
 
 - Main: The app's main view, accompanied by the View, ViewModel, and its logic.
 - PictureDetail: Each image's detail page, accompanied by the View, ViewModel, and its logic.
