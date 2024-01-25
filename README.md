@@ -7,7 +7,7 @@ I have used UIKit + RxSwift for the company I worked for and my projects, theref
 
 _Note on 2024.1.25_
 - API response time is slow at 4.5 - 5.0 seconds
-- Cacheing will be added
+- Cacheing mechanism has been implemented
 
 **How to install**
 
