@@ -1,4 +1,4 @@
-# AstronomyPictures
+# Astronomy Pictures
 
 Astronomy Pictures is an iOS project that shares amazing images related to space.
 This project utilises NASA's [Astronomy Picture of the Day(APOD)](https://api.nasa.gov/) API to fetch and display a new space image every day.
