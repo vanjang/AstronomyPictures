@@ -20,64 +20,6 @@ final class MainViewModelTests: XCTestCase {
         cancellables.removeAll()
     }
     
-    func testViewModelError() throws {
-        // Given
-        let mockNetworkService = MockNetworkService(responseData: mockData, responseError: TestError.test)
-        let paginationManager = PaginationManager()
-        let logic = MainViewModelLogic(paginationManager: paginationManager)
-        let viewModel = MainViewModel(networkService: mockNetworkService, logic: logic)
-        
-        // When
-        let expectation = XCTestExpectation(description: "ViewModel error")
-        var error: Error? = nil
-        viewModel.$error
-            .compactMap { $0 } // default is nil so ignore it
-            .sink { err in
-                error = err
-                expectation.fulfill()
-            }
-            .store(in: &cancellables)
-        
-        // Trigger viewWillAppear
-        viewModel.viewWillAppear.send(())
-        
-        // Wait for expectations
-        wait(for: [expectation], timeout: 1.0)
-        
-        // Check whether error has value
-        XCTAssertNotNil(error)
-    }
-    
-    func testViewModelInitialization() {
-        // Given
-        let mockNetworkService = MockNetworkService(responseData: mockData)
-        let paginationManager = PaginationManager()
-        let logic = MainViewModelLogic(paginationManager: paginationManager)
-        let viewModel = MainViewModel(networkService: mockNetworkService, logic: logic)
-        
-        // When
-        let expectation = XCTestExpectation(description: "ViewModel initialization")
-        viewModel.$items
-            .sink { items in
-                // Then
-                XCTAssertNotNil(viewModel.viewWillAppear)
-                XCTAssertNotNil(viewModel.didScroll)
-                XCTAssertNotNil(viewModel.isLoading)
-                XCTAssertNil(viewModel.error)
-                XCTAssertTrue(items.isEmpty)
-                XCTAssertFalse(viewModel.isLoading)
-                XCTAssertNil(viewModel.error)
-                expectation.fulfill()
-            }
-            .store(in: &cancellables)
-        
-        // Trigger viewWillAppear
-        viewModel.viewWillAppear.send(())
-        
-        // Wait for expectations
-        wait(for: [expectation], timeout: 1.0)
-    }
-    
     func testAPODFetching() {
         // Given
         let mockNetworkService = MockNetworkService(responseData: mockData)
@@ -99,7 +41,7 @@ final class MainViewModelTests: XCTestCase {
             .store(in: &cancellables)
 
         // Trigger viewWillAppear
-        viewModel.viewWillAppear.send(())
+        viewModel.fetch.send(())
 
         // Wait for expectations
         wait(for: [expectation], timeout: 2.0)
@@ -107,8 +49,72 @@ final class MainViewModelTests: XCTestCase {
         // Then
         XCTAssertNotNil(receivedItems)
         XCTAssertFalse(receivedItems!.isEmpty)
-        XCTAssertFalse(viewModel.isLoading)
-        XCTAssertNil(viewModel.error)
+        XCTAssert(viewModel.viewState == .populated)
+    }
+    
+    func testViewStateWithoutError() {
+        // Given
+        let mockNetworkService = MockNetworkService(responseData: mockData)
+        let paginationManager = PaginationManager()
+        let logic = MainViewModelLogic(paginationManager: paginationManager)
+        let viewModel = MainViewModel(networkService: mockNetworkService, logic: logic)
+        let givenStates: [ViewState] = [.empty, .loading, .populated]
+        
+        // When
+        let expectation = XCTestExpectation(description: "Fetch APODs")
+        var viewStates: [ViewState] = []
+
+        viewModel.$viewState
+            .sink { state in
+                viewStates.append(state)
+                
+                if viewStates.count > 2 {
+                    expectation.fulfill()
+                }
+            }
+            .store(in: &cancellables)
+
+        // Trigger viewWillAppear
+        viewModel.fetch.send(())
+
+        // Wait for expectations
+        wait(for: [expectation], timeout: 10.0)
+
+        // Then
+        XCTAssertTrue(viewStates == givenStates, "vs: \(viewStates), giv: \(givenStates)")
+    }
+    
+    func testViewStateWithError() {
+        // Given
+        let mockNetworkService = MockNetworkService(responseError: TestError.test)
+        let paginationManager = PaginationManager()
+        let logic = MainViewModelLogic(paginationManager: paginationManager)
+        let viewModel = MainViewModel(networkService: mockNetworkService, logic: logic)
+        let givenStates: [ViewState] = [.empty, .loading, .error]
+        
+        // When
+        let expectation = XCTestExpectation(description: "Fetch APODs")
+
+        var viewStates: [ViewState] = []
+        
+        viewModel.$viewState
+            .sink { state in
+                viewStates.append(state)
+                
+                if viewStates.count == 3 {
+                    expectation.fulfill()
+                }
+            }
+            .store(in: &cancellables)
+
+        // Trigger viewWillAppear
+        viewModel.fetch.send(())
+
+        // Wait for expectations
+        wait(for: [expectation], timeout: 1.0)
+
+        // Then
+        XCTAssert(viewStates == givenStates, "Compare both the result viewStates: \(viewStates) and the given viewStates: \(givenStates)")
     }
     
     // Mock response data for APOD

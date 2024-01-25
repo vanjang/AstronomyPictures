@@ -40,6 +40,7 @@
 		A37934D22B5F201300C0CF35 /* APODEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37934D12B5F201300C0CF35 /* APODEndpoint.swift */; };
 		A37934D42B5F20BA00C0CF35 /* APOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37934D32B5F20BA00C0CF35 /* APOD.swift */; };
 		A37934D72B5F39CB00C0CF35 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A37934D62B5F39CB00C0CF35 /* Kingfisher */; };
+		A3BA37C12B6245B000D8F709 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BA37C02B6245B000D8F709 /* ViewState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		A37934CE2B5F1FC500C0CF35 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		A37934D12B5F201300C0CF35 /* APODEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODEndpoint.swift; sourceTree = "<group>"; };
 		A37934D32B5F20BA00C0CF35 /* APOD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APOD.swift; sourceTree = "<group>"; };
+		A3BA37C02B6245B000D8F709 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 				A36CBB3C2B5D772D00CFF737 /* MainAstronomyPictureCellItem.swift */,
 				A30031702B616519004FCE7E /* MainViewModelLogic.swift */,
 				A300316C2B614C0C004FCE7E /* Section.swift */,
+				A3BA37C02B6245B000D8F709 /* ViewState.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				A37934C92B5F1B8400C0CF35 /* NetworkService.swift in Sources */,
 				A37934D42B5F20BA00C0CF35 /* APOD.swift in Sources */,
 				A30031692B612295004FCE7E /* APODUseCaseType.swift in Sources */,
+				A3BA37C12B6245B000D8F709 /* ViewState.swift in Sources */,
 				A36CBB012B5D027F00CFF737 /* MainViewController.swift in Sources */,
 				A36CBB362B5D6C6000CFF737 /* UsesAutoLayout.swift in Sources */,
 				A36CBB392B5D6D2A00CFF737 /* MainAstronomyPictureCell.swift in Sources */,
