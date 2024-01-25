@@ -30,9 +30,16 @@ struct NetworkService: NetworkServiceType {
             }
         }
         
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .map(\.data)
-            .decode(type: T.self, decoder: JSONDecoder())
+        // get cachedData if available
+        if let cachedResponse = URLCache.shared.cachedResponse(for: request),
+           let cachedData = try? JSONDecoder().decode(T.self, from: cachedResponse.data) {
+            return Just(cachedData)
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
+        
+       return URLSession.shared.dataTaskPublisher(for: request)
+            .cache(using: URLCache.shared, for: request, with: T.self)
             .eraseToAnyPublisher()
     }
 }

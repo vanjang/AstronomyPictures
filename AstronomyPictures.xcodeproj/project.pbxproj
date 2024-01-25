@@ -41,6 +41,8 @@
 		A37934D42B5F20BA00C0CF35 /* APOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37934D32B5F20BA00C0CF35 /* APOD.swift */; };
 		A37934D72B5F39CB00C0CF35 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A37934D62B5F39CB00C0CF35 /* Kingfisher */; };
 		A3BA37C12B6245B000D8F709 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BA37C02B6245B000D8F709 /* ViewState.swift */; };
+		A3F4AD2B2B631D1A003538D9 /* URLCacheExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4AD2A2B631D1A003538D9 /* URLCacheExtension.swift */; };
+		A3F4AD2D2B631D2C003538D9 /* PublisherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F4AD2C2B631D2C003538D9 /* PublisherExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +101,8 @@
 		A37934D12B5F201300C0CF35 /* APODEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODEndpoint.swift; sourceTree = "<group>"; };
 		A37934D32B5F20BA00C0CF35 /* APOD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APOD.swift; sourceTree = "<group>"; };
 		A3BA37C02B6245B000D8F709 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
+		A3F4AD2A2B631D1A003538D9 /* URLCacheExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLCacheExtension.swift; sourceTree = "<group>"; };
+		A3F4AD2C2B631D2C003538D9 /* PublisherExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,7 @@
 		A36CBAFB2B5D027F00CFF737 /* AstronomyPictures */ = {
 			isa = PBXGroup;
 			children = (
+				A3F4AD292B631D0B003538D9 /* Extensions */,
 				A30031672B612285004FCE7E /* APODUseCase */,
 				A30031742B6170EB004FCE7E /* Util */,
 				A37934C72B5F1AC200C0CF35 /* Network */,
@@ -265,6 +270,15 @@
 				A37934D12B5F201300C0CF35 /* APODEndpoint.swift */,
 			);
 			path = "API EndPoints";
+			sourceTree = "<group>";
+		};
+		A3F4AD292B631D0B003538D9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A3F4AD2A2B631D1A003538D9 /* URLCacheExtension.swift */,
+				A3F4AD2C2B631D2C003538D9 /* PublisherExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -407,6 +421,7 @@
 				A36CBB442B5DD18600CFF737 /* PictureDetailView.swift in Sources */,
 				A36CBB3B2B5D76F000CFF737 /* MainViewModel.swift in Sources */,
 				A30031732B616F23004FCE7E /* PaginationManager.swift in Sources */,
+				A3F4AD2D2B631D2C003538D9 /* PublisherExtension.swift in Sources */,
 				A37934D22B5F201300C0CF35 /* APODEndpoint.swift in Sources */,
 				A300316D2B614C0C004FCE7E /* Section.swift in Sources */,
 				A37934C92B5F1B8400C0CF35 /* NetworkService.swift in Sources */,
@@ -426,6 +441,7 @@
 				A36CBB422B5DD12D00CFF737 /* PictureDetailHostingController.swift in Sources */,
 				A37934CB2B5F1FB000C0CF35 /* NetworkServiceType.swift in Sources */,
 				A37934CD2B5F1FBB00C0CF35 /* EndPoint.swift in Sources */,
+				A3F4AD2B2B631D1A003538D9 /* URLCacheExtension.swift in Sources */,
 				A36CBB3D2B5D772D00CFF737 /* MainAstronomyPictureCellItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
